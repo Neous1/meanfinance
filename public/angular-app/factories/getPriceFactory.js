@@ -1,7 +1,7 @@
 angular.module('cdfinance').factory('getPriceFactory', getPriceFactory);
 
 function getPriceFactory($http) {
-  // var vm = this;
+  var getit = this;
 
   return {
     findPrice: findPrice
@@ -21,9 +21,11 @@ function getPriceFactory($http) {
 
   function complete (response) {
     console.log("found stock");
-    var stockprice = response.data.price;
-    console.log("this is stockprice: "+stockprice);
-    getPriceFactory.stockprice = stockprice;
+    getit.stockprice = response.data.price;
+    console.log("this is stockprice: " + getit.stockprice);
+
+    // return getPriceFactory.stockprice;
+    // return getPriceFactory.stockprice;
   };//complete
 
   function failed (error) {

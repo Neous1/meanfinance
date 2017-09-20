@@ -15,7 +15,15 @@ function FindController($http, getPriceFactory) {
     // // // symbol will always show as uppercase on browser
     // console.log("this is symbol: "+symbol);
 
-    getPriceFactory.findPrice( symbol );
+    // not working
+    var asdf = getPriceFactory.findPrice( symbol );
+
+    setTimeout(function(){
+      console.log("in setTimeout");
+      vm.stockprice = asdf
+      }, 5000
+    );
+
 
     // $http.get("/api/stocks/" + symbol).then(function(response) {
     //   console.log("found stock")
