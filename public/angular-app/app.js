@@ -2,7 +2,7 @@ angular.module('cdfinance', ['ngRoute', 'angular-jwt']).config(config).run(run);
 
 function config($httpProvider, $routeProvider) {
   $httpProvider.interceptors.push('AuthInterceptor');
-  
+
   $routeProvider
     .when('/', {
       templateUrl: 'angular-app/main/main.html',
@@ -41,7 +41,7 @@ function config($httpProvider, $routeProvider) {
       access: {
         restricted: false
       }
-    }) 
+    })
     .when('/deposit', {
       templateUrl: 'angular-app/deposit/deposit.html',
       controller: DepositController,
@@ -56,6 +56,9 @@ function config($httpProvider, $routeProvider) {
 }
 
 function run($rootScope, $location, $window, AuthFactory) {
+  $rootScope.totalValueOfSecurities = 0;
+  // adding here so all file have access
+
   $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {
     if (nextRoute.access !== undefined && nextRoute.access.restricted && !$window.sessionStorage.token && !AuthFactory.isLoggedIn) {
       event.preventDefault();
