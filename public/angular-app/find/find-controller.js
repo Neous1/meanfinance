@@ -4,9 +4,11 @@ function FindController($http) {
   var vm = this;
   console.log("findController");
   vm.find = function() {
-    var symbol = vm.symbol
+    // symbol can be put in input as lower or uppercase
+    var symbol = vm.symbol.toUpperCase();
+    // symbol will always show as uppercase on browser
     console.log(symbol)
-    
+
     $http.get("/api/stocks/" + symbol).then(function(response) {
       console.log("found stock")
       var stockprice = response.data.price

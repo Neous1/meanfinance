@@ -2,21 +2,21 @@ var https = require('https');
 var _apiUrl = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&apikey=3KZ8QLDN95EF7RNO&outputsize=compact"
 
 module.exports.getPrice = function(req, res, symbol) {
-  
+
   var url = _apiUrl + "&symbol=" + symbol
-  
+
   console.log(url);
 
   var request = https.get(url, function (response) {
     // data is streamed in chunks from the server
-    // so we have to handle the "data" event    
-    var buffer = "", 
+    // so we have to handle the "data" event
+    var buffer = "",
       data,
       route;
 
     response.on("data", function (chunk) {
       buffer += chunk;
-    }); 
+    });
 
     response.on("end", function (err) {
       if (err) {
@@ -35,8 +35,8 @@ module.exports.getPrice = function(req, res, symbol) {
           .status(200)
           .json({"price" : price});
       }
-    }); 
-  }); 
+    });
+  });
 }
 
 module.exports.returnPrice = function(symbol) {
@@ -44,14 +44,14 @@ module.exports.returnPrice = function(symbol) {
   console.log(url);
   var request = https.get(url, function (response) {
     // data is streamed in chunks from the server
-    // so we have to handle the "data" event    
-    var buffer = "", 
+    // so we have to handle the "data" event
+    var buffer = "",
       data,
       route;
 
     response.on("data", function (chunk) {
       buffer += chunk;
-    }); 
+    });
 
     response.on("end", function (err) {
       if (err) {
@@ -65,6 +65,6 @@ module.exports.returnPrice = function(symbol) {
         var keys = Object.keys(stockData);
         return parseFloat(stockData[keys[0]]['4. close']);
       }
-    }); 
-  }); 
+    });
+  });
 }
