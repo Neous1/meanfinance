@@ -11,7 +11,8 @@ function BuyController($http, $window, AuthFactory, jwtHelper, $location, $rootS
       var username = decodedToken.username;
 
       var data = {"symbol" : vm.symbol, "amount": vm.amount}; // amount refers to numShares
-      console.log("this is data: "+data["amount"]);
+      console.log("this is data.symbol: ", data["symbol"]);
+      console.log("this is data.amount: ", data["amount"]);
 
       // need to find valueOfShares bought and subtract from vm.balance on dashboard.
       //var valueOfShares =  data["amount"] * ; // numShares * pricePerShare
@@ -32,7 +33,19 @@ function BuyController($http, $window, AuthFactory, jwtHelper, $location, $rootS
       // })//catch
       // /////////////////
 
-      // $http.get('/api/users/'+ username +"/stocks/" + symbol)
+      $http.get('/api/stocks/' + data["symbol"])
+        .then(function(res){
+          console.log("this is data.symbol inside GET: ", data["symbol"]);
+          console.log("this is the GET response: ", res);
+          var stockprice = res.data.price;
+          console.log("this is stockprice: ", stockprice);
+          vm.stockprice = stockprice; // how do we use this????
+
+
+        })
+        .catch(function(err){
+          vm.error = err;
+        });
 
 
       $http.post('/api/users/'+ username +"/stocks", data).then(function(response) {
@@ -40,8 +53,10 @@ function BuyController($http, $window, AuthFactory, jwtHelper, $location, $rootS
       }).catch(function(error) {
         console.log(error);
       })
-    } else {
+    }//if
+    else {
       $location.path('/');
-    }
+    }//else
+
   }
 }
