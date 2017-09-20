@@ -2,7 +2,8 @@ angular.module('cdfinance').controller("BuyController", BuyController);
 
 function BuyController($http, $window, AuthFactory, jwtHelper, $location, $rootScope, getPriceFactory) {
   var vm = this;
-  console.log(getPriceFactory.hello);
+  getPriceFactory.hello(); // test 1
+  
 
   vm.buy = function() {
     if ($window.sessionStorage.token && AuthFactory.isLoggedIn) {
