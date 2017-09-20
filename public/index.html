@@ -8,15 +8,19 @@
 <body>
 
   <mh-navigation></mh-navigation>
-  <div class="container">
+  <div class="flex-container">
+    <div class="box flex1">
     <p class= "text-muted text-center">
-      <img class='text-center' src="/images/Logo.png" height="150" alt="CareerDevs Finance"/>
+      <img class='text-center' id="logo-center" src="/images/Logo.png" height="150" alt="CareerDevs Finance"/>
     </p>
-    <div ng-view></div>
-  </div>
+    </div>
 
+    <div ng-view class="box flex2"></div>
+
+
+  <div class="box flex3">
   <footer class="footer">
-    <div class="container">
+    <!-- <div class="container"> -->
       <p class="text-muted text-center">
         <img src="/images/Logo.png" height="35" alt="CareerDevs Finance"/>
       </p>
@@ -26,6 +30,7 @@
       </p>
     </div>
   </footer>
+</div>
 
   <script src="jquery/jquery-2.1.4.min.js"></script>
   <script src="node_modules/angular/angular.js"></script>
