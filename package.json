@@ -26,7 +26,9 @@
     "express": "^4.15.4",
     "jsonwebtoken": "^8.0.1",
     "mongodb": "^2.2.31",
-    "mongoose": "^4.11.11"
+    "mongoose": "^4.11.11",
+    "querystring": "^0.2.0",
+    "request": "^2.82.0"
   },
   "devDependencies": {
     "mocha": "^3.5.3"

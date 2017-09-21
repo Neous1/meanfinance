@@ -33,13 +33,13 @@ module.exports.bStocksGetAll = function(req, res) {
       } else {
         console.log('found user');
         //found the user. pull down the users stocks as well as the stocks current price
-        var stocks = user.stocks;
+        // var stocks = user.stocks;
+        var stocks = [{_id: "FB"}];
         var prices = [];
         stocks.forEach(function(stock) {
 
           prices.push(stockPrice.returnPrice(stock._id));
           console.log("this is stock._id: ", stock._id);
-          console.log("this is stockPrice.returnPrice(stock._id)*****>>>>>", stockPrice.returnPrice(stock._id));
         });
 
         console.log("this is prices: ", prices); // I want to see this.
