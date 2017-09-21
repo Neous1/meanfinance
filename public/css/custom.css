@@ -107,3 +107,9 @@
 font-size: 12;
 color: black;
 }
+
+.flex-item {
+  margin: 10px;
+  flex-direction: row;
+  justify-content: center
+      }
