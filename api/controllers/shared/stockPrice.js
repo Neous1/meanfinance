@@ -63,6 +63,7 @@ module.exports.returnPrice = function(symbol) {
         // console.log(data);
         var stockData = data['Time Series (Daily)']
         var keys = Object.keys(stockData);
+        console.log(parseFloat(stockData[keys[0]]['4. close']));
         return parseFloat(stockData[keys[0]]['4. close']);
       }
     }); 
