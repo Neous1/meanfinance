@@ -5,6 +5,7 @@ function BuyController($http, $window, AuthFactory, jwtHelper, $location, $rootS
   // getPriceFactory.hello(); // test 1
 
   vm.buy = function() {
+
     if ($window.sessionStorage.token && AuthFactory.isLoggedIn) {
       var token = $window.sessionStorage.token;
       var decodedToken = jwtHelper.decodeToken(token);
@@ -39,7 +40,9 @@ function BuyController($http, $window, AuthFactory, jwtHelper, $location, $rootS
           console.log("this is the GET response: ", res);
           var stockprice = res.data.price;
           console.log("this is stockprice: ", stockprice);
-          vm.stockprice = stockprice; // how do we use this????
+          vm.stockprice = stockprice; // how do we use this to display later????
+          var valueOfShares =  data["amount"] * stockprice; // numShares * pricePerShare
+          console.log('You just spent this much money: ', valueOfShares);
 
 
         })
@@ -52,11 +55,12 @@ function BuyController($http, $window, AuthFactory, jwtHelper, $location, $rootS
         //check the responses
       }).catch(function(error) {
         console.log(error);
-      })
+      });
     }//if
     else {
       $location.path('/');
     }//else
-
+    
+    // outside of if/else conditional
   }
 }

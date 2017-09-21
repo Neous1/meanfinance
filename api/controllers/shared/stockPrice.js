@@ -46,14 +46,16 @@ module.exports.returnPrice = function(symbol) {
     // data is streamed in chunks from the server
     // so we have to handle the "data" event
     var buffer = "",
-      data,
-      route;
+        data,
+        route;
 
     response.on("data", function (chunk) {
+      console.log("CHUCKSSSSSSSSSSSSSSSSS");
       buffer += chunk;
     });
 
     response.on("end", function (err) {
+      console.log("EEENNNNNNDDDDDD");
       if (err) {
         return err
       } else {
@@ -61,7 +63,7 @@ module.exports.returnPrice = function(symbol) {
         // dump the raw data
         data = JSON.parse(buffer);
         // console.log(data);
-        var stockData = data['Time Series (Daily)']
+        var stockData = data['Time Series (Daily)'];
         var keys = Object.keys(stockData);
         return parseFloat(stockData[keys[0]]['4. close']);
       }

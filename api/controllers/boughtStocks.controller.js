@@ -4,10 +4,10 @@ var User = mongoose.model('User');
 var stockPrice = require('./shared/stockPrice.js')
 
 module.exports.bStocksGetAll = function(req, res) {
-  console.log("hello"); 
+  console.log("hello");
   var username = req.params.username;
   console.log("looking for user", username);
-  
+
   User
     .findOne({username: username})
     .exec(function(err, user) {
@@ -15,7 +15,7 @@ module.exports.bStocksGetAll = function(req, res) {
         status : 200,
         message : user
       }
-      
+
       if (err) {
         response.status = 500;
         response.message = err;
@@ -24,8 +24,8 @@ module.exports.bStocksGetAll = function(req, res) {
         response.message = {
           "message" : "user not found"
         };
-      } 
-      
+      }
+
       if (response.status !== 200) {
         res
           .status(response.status)
@@ -36,8 +36,13 @@ module.exports.bStocksGetAll = function(req, res) {
         var stocks = user.stocks;
         var prices = [];
         stocks.forEach(function(stock) {
-          prices.push(stockPrice.returnPrice(stock._id))
+
+          prices.push(stockPrice.returnPrice(stock._id));
+          console.log("this is stock._id: ", stock._id);
+          console.log("this is stockPrice.returnPrice(stock._id)*****>>>>>", stockPrice.returnPrice(stock._id));
         });
+
+        console.log("this is prices: ", prices); // I want to see this.
         res
           .status(200)
           .json({"stocks" : stocks, "prices" : prices})
@@ -47,9 +52,9 @@ module.exports.bStocksGetAll = function(req, res) {
 
 module.exports.bStocksBuy = function(req, res) {
   var symbol = req.body.symbol;
-  
+
   console.log(req.body);
-  
+
   //check if the stock is valid
   Stock
     .findById(symbol)
@@ -66,10 +71,10 @@ module.exports.bStocksBuy = function(req, res) {
         //stock is valid. get the stocks price.)
         var price = stockPrice.returnPrice(symbol);
         var cost = parseInt(req.body.amount) * price;
-        
+
         //find the user
         var username = req.params.username;
-        
+
         User
           .findOne({username: username})
           .exec(function(err, user) {
@@ -105,7 +110,7 @@ module.exports.bStocksBuy = function(req, res) {
               }
             }
           })
-        
+
         //once authentication is built update the users stocks.
         //first check if he already has said stock...
       }
@@ -122,7 +127,7 @@ module.exports.bStocksSellAll = function(req, res) {
         status : 200,
         message : user
       }
-      
+
       if (err) {
         response.status = 500;
         response.message = err;
@@ -131,8 +136,8 @@ module.exports.bStocksSellAll = function(req, res) {
         response.message = {
           "message" : "user not found"
         };
-      } 
-      
+      }
+
       if (response.status !== 200) {
         res
           .status(response.status)
@@ -161,4 +166,3 @@ module.exports.bStocksSellAll = function(req, res) {
       }
     });
 }
-

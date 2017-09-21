@@ -13,7 +13,7 @@ function DashboardController( $http, $window, AuthFactory, jwtHelper, $location)
       console.log(error);
     })
     $http.get('/api/users/' + username).then(function(response) {
-      vm.balance = response.data // stuff here
+      vm.balance = response.data; // stuff here
 
     })
   } else {
