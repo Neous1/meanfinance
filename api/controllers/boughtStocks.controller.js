@@ -57,11 +57,15 @@ module.exports.bStocksBuy = function(req, res) {
   Stock
     .findById(symbol)
     .exec(function(err, stock) {
+      
+      console.log('stock ==>',stock );
+      
       if (err) {
         res
           .status(500)
           .json(err)
-      } else if (!stock) {
+      } else if (!stock || stock == null) {
+        console.log('stock NO GOOD: ', stock);
         res
           .status(404)
           .json({"message" : "Stock not valid"});
@@ -89,22 +93,30 @@ module.exports.bStocksBuy = function(req, res) {
                   .json(json);
               } else {
                 // enough funds Buy the stock
-                var stocks = user.stocks
-                stocks.push({
-                  _id : symbol,
-                  amount : req.body.amount
-                })
-                user.save(function(err, userUpdated) {
-                  if (err) {
-                    res
-                      .status(500)
-                      .json(err)
-                  } else {
-                    res
-                      .status(200)
-                      .json({status: "bought"});
-                  }
-                })
+                var stocks = user.stocks;
+                var stockIsOwned = false;
+                stocks.forEach(function(item){
+                  console.log("99. ", item, stock);
+                  if (item._id == stock._id){
+                    stockIsOwned = true;
+                    console.log("102. ", stockIsOwned);
+                  };
+                }); 
+                // stocks.push({
+                //   _id : symbol,
+                //   amount : req.body.amount
+                // })
+                // user.save(function(err, userUpdated) {
+                //   if (err) {
+                //     res
+                //       .status(500)
+                //       .json(err)
+                //   } else {
+                //     res
+                //       .status(200)
+                //       .json({status: "bought"});
+                //   }
+                // })
               }
             }
           })

@@ -13,8 +13,10 @@ function BuyController($http, $window, AuthFactory, jwtHelper, $location) {
       
       $http.post('/api/users/'+ username +"/stocks", data).then(function(response) {
         //check the responses
+        vm.error=false;
       }).catch(function(error) {
         console.log(error);
+        vm.error = error.data.message;
       })
     } else {
       $location.path('/');
