@@ -4,9 +4,9 @@ var https = require('https');
 var stockPrice = require('./shared/stockPrice.js')
 
 module.exports.stocksGetPrice = function(req, res) {
-  var symbol = req.params.symbol
+  var symbol = req.params.symbol;
   console.log("looking up symbol:", symbol);
-  
+
   Stock
     .findById(symbol)
     .exec(function(err, stock) {
@@ -22,8 +22,8 @@ module.exports.stocksGetPrice = function(req, res) {
         //found the stock symbol it is a valid NASDAQ stock symbol pull data
         //from api.
         var price = stockPrice.getPrice(req, res, symbol);
-        
+
       }
     })
-  
+
 }

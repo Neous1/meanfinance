@@ -1,4 +1,5 @@
 .flex-container{
+<<<<<<< HEAD
   margin: 1em 0;
   border: 1px solid #333;
   display: -webkit-flex;
@@ -46,4 +47,113 @@
   -webkit-align-flex2: flex-end;
   -ms-flex-item-align: end;
   align-flex2: flex-end;
+=======
+
+  margin: 1em 0;
+
+  border: 1px solid #333;
+
+  display: -webkit-flex;
+
+  display: -ms-flexbox;
+
+  display: flex;
+
+  /*-webkit-flex-direction: column;/*default direction is row*/
+
+  /*-ms-flexbox-direction: column;*/
+
+  /*flex-direction: column;*/*/
+
+  width: auto;; /*needed?*/
+
+  height: auto;/*needed?*/
+
+  -webkit-flex-flow: column wrap;/*flow combines direction (row or column) & wrap*/
+
+  -ms-flexbox-flow: column wrap;
+
+  flex-flow: column wrap;
+
+  -webkit-justify-content: space-around;
+
+  -ms-flex-pack: justify;
+
+  /*justify-content: space-around;*/
+
+  align-items: flex-start;
+
+  -webkit-align-items: center;
+
+  -ms-flex-align: center;
+
+  align-items: center;
+
+}
+
+.box{
+
+  margin: 20px;
+
+}
+
+.flex1 {
+
+  -webkit-flex: 3;
+
+  -ms-flexbox: 3;
+
+  flex: 3;
+
+  -webkit-align-flex1: flex-start;
+
+  -ms-flex-item-align: start;
+
+  align-flex1: flex-start;
+
+}
+
+.flex2 {
+
+  -webkit-flex: 7;
+
+  -ms-flexbox: 7;
+
+  flex: 7;
+
+  -webkit-align-flex2: flex-start;
+
+  -ms-flex-item-align: start;
+
+  align-flex2: flex-start;
+
+}
+
+.flex3 {
+
+  -webkit-flex: 2;
+
+  -ms-flexbox: 2;
+
+  flex: 2;
+
+  -webkit-align-flex2: flex-end;
+
+  -ms-flex-item-align: end;
+
+  align-flex2: flex-end;
+
+}
+#p1{
+	background-color: #EBEBEB;
+	padding-top: 40px;
+	margin-top:2%;
+	height:250px;
+	font-size: 16;
+	color: black;
+}
+.nav{
+font-size: 12;
+color: black;
+>>>>>>> 8aeb1642170e0877810d1ca4b18941926acfcac4
 }
