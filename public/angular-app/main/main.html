@@ -16,7 +16,11 @@
     <tr ng-repeat="stock in vm.stocks" ng-init="counter = 0">
       <td>{{stock._id}}</td>
       <td>{{stock.amount}}</td>
-      <!-- <td>{{vm.prices[counter++] | currency}}</td> -->
+      <td>{{<label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+          </label>
+          }}</td>
     </tr>
   </tbody>
 </table>
