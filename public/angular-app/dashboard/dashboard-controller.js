@@ -10,19 +10,26 @@ function DashboardController($http, $window, AuthFactory, jwtHelper, $location) 
 
     $http.get('/api/users/' + username + "/stocks").then(function (response) {
         vm.stocks = response.data.stocks;
+
+        vm.stocks.sort(function (a, b) {
+          console.log("18. ", a, b);
+          console.log("18. ", a._id, b._id);
+          return (a._id < b._id) ? -1 : (a._id > b._id) ? 1 : 0;
+        });
+
         latestprices = [];
       })
-      .then(function (response) {
-        // 14. vm.stock
-        console.log('14. vm.stock: ', vm.stocks);
-        vm.stocks.forEach(function (element) {
-          $http.get("/api/latestprice/" + element._id)
-            .then(function (response) {
-              console.log("20 . ", response)
-            })
-        }, this);
+      // .then(function (response) {
+      //   // 14. vm.stock
+      //   console.log('14. vm.stock: ', vm.stocks);
+      //   vm.stocks.forEach(function (element) {
+      //     $http.get("/api/latestprice/" + element._id)
+      //       .then(function (response) {
+      //         console.log("20 . ", response.data.sym, response.data.price)
+      //       })
+      //   }, this);
 
-      })
+      // })
       .catch(function (error) {
         console.log(error);
       })

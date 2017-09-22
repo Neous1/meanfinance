@@ -34,7 +34,7 @@ module.exports.latestPrice = function (req, res) {
   console.log("32. latestprice FUNC", symbol);
 
   var url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&apikey=3KZ8QLDN95EF7RNO&outputsize=compact&symbol="+symbol;
-  // var url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&apikey=3KZ8QLDN95EF7RNO&outputsize=compact&symbol=AMZN",
+
   var request = https.get(url, function (response) {
     // data is streamed in chunks from the server
     // so we have to handle the "data" event    
@@ -52,18 +52,15 @@ module.exports.latestPrice = function (req, res) {
           .status(500)
           .json(err)
       } else {
-        // finished transferring data
-        // dump the raw data
         data = JSON.parse(buffer);
-        console.log("57 . ", data);
-        // var stockData = data['Time Series (Daily)']
-        // var keys = Object.keys(stockData);
-        // var price = parseFloat(stockData[keys[0]]['4. close']);
-        // res
-        //   .status(200)
-        //   .json({
-        //     "price": price
-        //   });
+        var lprice = data['Realtime Global Securities Quote']['03. Latest Price'];
+        console.log("57 . ", data['Realtime Global Securities Quote']['03. Latest Price']);
+        res
+          .status(200)
+          .json({
+            "sym":symbol,
+            "price": lprice
+          });
       }
     });
   });
