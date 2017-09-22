@@ -38,7 +38,7 @@ module.exports.bStocksGetAll = function(req, res) {
         var prices = [];
         stocks.forEach(function(stock) {
           prices.push(stockPrice.returnPrice(stock._id))
-          console.log("get stock id", stock._id)
+          console.log("get stock id", stock, stock._id)
           console.log("get price of ", prices[prices.length - 1])
         });
         res
@@ -50,6 +50,9 @@ module.exports.bStocksGetAll = function(req, res) {
 
 module.exports.bStocksBuy = function(req, res) {
   var symbol = req.body.symbol;
+  // console.log('53 .: ', symbol);
+  
+  symbol = symbol.toUpperCase();
   
   console.log(req.body);
   
@@ -58,14 +61,14 @@ module.exports.bStocksBuy = function(req, res) {
     .findById(symbol)
     .exec(function(err, stock) {
       
-      console.log('stock ==>',stock );
+      // console.log('stock ==>',stock );
       
       if (err) {
         res
           .status(500)
           .json(err)
       } else if (!stock || stock == null) {
-        console.log('stock NO GOOD: ', stock);
+        // console.log('stock NO GOOD: ', stock);
         res
           .status(404)
           .json({"message" : "Stock not valid"});
@@ -96,27 +99,38 @@ module.exports.bStocksBuy = function(req, res) {
                 var stocks = user.stocks;
                 var stockIsOwned = false;
                 stocks.forEach(function(item){
-                  console.log("99. ", item, stock);
+                  // console.log("99. ", item, stock);
                   if (item._id == stock._id){
                     stockIsOwned = true;
-                    console.log("102. ", stockIsOwned);
+                    // console.log("102. ", stockIsOwned);
                   };
                 }); 
-                // stocks.push({
-                //   _id : symbol,
-                //   amount : req.body.amount
-                // })
-                // user.save(function(err, userUpdated) {
-                //   if (err) {
-                //     res
-                //       .status(500)
-                //       .json(err)
-                //   } else {
-                //     res
-                //       .status(200)
-                //       .json({status: "bought"});
-                //   }
-                // })
+                if (stockIsOwned == false){
+                  stocks.push({
+                    _id : symbol,
+                    amount : req.body.amount
+                  })
+                }else{
+                  console.log("114. ", stocks)
+                  var s = stocks.find(function(item){
+                    console.log('stock exist 117: ', item._id, symbol);
+                    return item._id == symbol;
+                  })               
+                  console.log('119 . : ', s);
+                  s.amount += req.body.amount;
+                }
+
+                user.save(function(err, userUpdated) {
+                  if (err) {
+                    res
+                      .status(500)
+                      .json(err)
+                  } else {
+                    res
+                      .status(200)
+                      .json({status: "bought"});
+                  }
+                })
               }
             }
           })

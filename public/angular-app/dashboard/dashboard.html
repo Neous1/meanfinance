@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th>Name/Symbol</th>
-      <th>Value Stocks</th><!--where do we get value of stocks -->
+      <th>Stock Price</th><!--where do we get value of stocks -->
       <th>No. of Shares</th>
       <th>Total Value</th>
     </tr>
@@ -10,9 +10,9 @@
   <tbody>
     <tr ng-repeat="stock in vm.stocks" ng-init="counter = 0">
       <td>{{stock._id}}</td>
+      <td>{{stock.price}}</td>
       <td>{{stock.amount}}</td>
-      <td>{{stock.amount}}</td>
-      <td>{{vm.prices[counter++] | currency}}</td>
+      <!-- <td>{{vm.prices[counter++] | currency}}</td> -->
     </tr>
     <tr>
       <td></td>
