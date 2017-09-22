@@ -10,9 +10,9 @@
   <tbody>
     <tr ng-repeat="stock in vm.stocks" ng-init="counter = 0">
       <td>{{stock._id}}</td>
-      <td>{{stock.price}}</td>
+      <td>{{stock.price | currency}}</td>
       <td>{{stock.amount}}</td>
-      <td>{{stock.totalValue}}</td>
+      <td>{{stock.totalValue | currency}}</td>
       <!-- <td>{{vm.prices[counter++] | currency}}</td> -->
     </tr>
     <tr>

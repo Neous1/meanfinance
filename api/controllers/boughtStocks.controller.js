@@ -88,7 +88,7 @@ module.exports.bStocksBuy = function(req, res) {
                 .status(500)
                 .json(err)
             } else {
-              var userBalance = user.balance
+              var userBalance = user.balance - cost
               if (cost > userBalance) {
                 var json = {status: "lowBalance"}
                 res
