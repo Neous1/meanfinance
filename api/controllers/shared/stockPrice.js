@@ -63,11 +63,11 @@ module.exports.returnPrice = function(symbol) {
         // console.log(data);
         var stockData = data['Time Series (Daily)']
         if(null == stockData || undefined == stockData){
-           console.log('"66 . error": ', stockData, data);
+          //  console.log('"66 . error": ', stockData, data);
            return data;
         }else{
           var keys = Object.keys(stockData);
-          console.log(parseFloat(stockData[keys[0]]['4. close']));
+          // console.log("70. ", parseFloat(stockData[keys[0]]['4. close']));
           return parseFloat(stockData[keys[0]]['4. close']);
         }
       }

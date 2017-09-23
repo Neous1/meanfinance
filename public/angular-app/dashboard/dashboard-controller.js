@@ -48,13 +48,14 @@ function DashboardController($http, $window, AuthFactory, jwtHelper, $location) 
 
       }
 
-
-
     $http.get('/api/users/' + username).then(function (response) {
-      vm.balance = response.data
+      // console.log('53. ', username);
+      vm.balance = response.data;
+      
     })
 
-  } else {
+  } 
+  else {
     $location.path('/');
   }
 }

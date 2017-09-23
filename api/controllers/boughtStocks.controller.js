@@ -39,7 +39,7 @@ module.exports.bStocksGetAll = function(req, res) {
         stocks.forEach(function(stock) {
           prices.push(stockPrice.returnPrice(stock._id))
           console.log("get stock id", stock, stock._id)
-          console.log("get price of ", prices[prices.length - 1])
+          // console.log("get price of ", prices[prices.length - 1])
         });
         res
           .status(200)
@@ -76,7 +76,6 @@ module.exports.bStocksBuy = function(req, res) {
         //stock is valid. get the stocks price.)
         var price = stockPrice.returnPrice(symbol);
         var cost = parseInt(req.body.amount) * price;
-        
         //find the user
         var username = req.params.username;
         
@@ -88,7 +87,7 @@ module.exports.bStocksBuy = function(req, res) {
                 .status(500)
                 .json(err)
             } else {
-              var userBalance = user.balance - cost
+              var userBalance = user.balance   
               if (cost > userBalance) {
                 var json = {status: "lowBalance"}
                 res
@@ -113,13 +112,12 @@ module.exports.bStocksBuy = function(req, res) {
                 }else{
                   console.log("114. ", stocks)
                   var s = stocks.find(function(item){
-                    console.log('stock exist 117: ', item._id, symbol);
+                    console.log('stock exist 116: ', item._id, symbol);
                     return item._id == symbol;
                   })               
-                  console.log('119 . : ', s);
+                  console.log('119  :', s);
                   s.amount += req.body.amount;
                 }
-
                 user.save(function(err, userUpdated) {
                   if (err) {
                     res

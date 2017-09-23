@@ -83,6 +83,7 @@ module.exports.depositFunds = function(req, res) {
       } else {
         var newBalance = user.balance + parseFloat(req.body.amount);
         user.balance = newBalance;
+        
         user.save(function(err, user) {
           if (err) {
             res
@@ -110,6 +111,7 @@ module.exports.getUserBalance = function(req, res) {
       } else { 
         console.log('found user');
         var balance = user.balance
+        
         res
           .status(200)
           .json(balance)
